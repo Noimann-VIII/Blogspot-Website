@@ -1,11 +1,16 @@
-/* not-found.css */
-h1,
-p {
+
+h1, p {
   text-align: center;
   color: inherit;
 }
 
-/* container for 404 and message */
+h1 {
+    top: 45%;
+    font-size: 8rem;
+    font-size: 800;
+    letter-spacing: 2px;
+}
+
 h1,
 p {
   position: absolute;
@@ -16,5 +21,9 @@ p {
 }
 
 p {
-  top: 58%; /* slightly below the 404 text */
+  top: 56%;
+  font-size: 1.3rem; /* more readable text */
+  line-height: 1.5;
+  color: #ccc; /* soft contrast for readability */
+  max-width: 600px;
 }
