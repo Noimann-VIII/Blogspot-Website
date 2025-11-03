@@ -21,7 +21,6 @@ p {
 }
 
 p {
-  top: 56%;
   font-size: 1.3rem; /* more readable text */
   line-height: 1.5;
   color: #ccc; /* soft contrast for readability */
