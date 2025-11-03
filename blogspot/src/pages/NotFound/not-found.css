@@ -6,7 +6,7 @@ h1, p {
 
 h1 {
     top: 45%;
-    font-size: 8rem;
+    font-size: 10rem;
     font-size: 800;
     letter-spacing: 2px;
 }
@@ -22,8 +22,8 @@ p {
 
 p {
   top: 65%;
-  font-size: 1.3rem; /* more readable text */
+  font-size: 2rem; 
   line-height: 1.5;
-  color: #ccc; /* soft contrast for readability */
+  color: #ccc; 
   max-width: 600px;
 }
