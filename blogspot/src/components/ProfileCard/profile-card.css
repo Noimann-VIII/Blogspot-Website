@@ -1,0 +1,26 @@
+.profile-card{
+    margin: 10px;
+    padding: 5px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    padding: 20px;
+    background-color: rgb(48, 48, 48);
+    border-radius: 10px;
+}
+
+.profile-card h3{
+    margin: 10px;
+    margin-bottom: 10px;
+}
+
+#member{
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px;
+}
+
+#about{
+    margin-top: 20px;
+}
