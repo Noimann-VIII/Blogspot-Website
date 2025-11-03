@@ -5,7 +5,7 @@ function MemberCard(m){
         <>
             <div className="member-card">
             <div>
-            <img src={m.imageURL}alt={m.name} />
+            <img src={m.imageURL} alt={m.name} />
         </div>
             <div>
             <h3>{m.name}</h3>

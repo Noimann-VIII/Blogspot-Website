@@ -14,7 +14,6 @@ function RegisterCard() {
     e.preventDefault();
     setError("");
 
-    //check kung same pass
     if (password !== confirmPassword) {
       setError("Passwords do not match!");
       return;
@@ -23,7 +22,7 @@ function RegisterCard() {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      console.log("Successfully registered:", user.email);
+      window.location.href="/home";
     
     } catch (error) {
       setError(error.message);

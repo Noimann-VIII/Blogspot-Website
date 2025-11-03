@@ -3,7 +3,7 @@
 {
     padding: 20px;
     width: 50%;
-    margin: 80px auto;
+    margin: 20px auto;
     text-align: center;
     background-color: #ffffff;
     display: flex;
@@ -62,6 +62,12 @@
     background-color: rgb(136, 160, 231);
     border: none;
     color: white;
+    cursor: pointer;
+}
+
+.register-card button:hover
+{
+    background-color: rgb(106, 130, 201);
 }
 
 .register-card a
@@ -75,17 +81,16 @@
 .form-group {
   display: flex;
   align-items: center;
- font-family: chakra petch, sans-serif;
-  width: 96%;
-  
+  justify-content: center;
+  font-family: chakra petch, sans-serif;
+  width: 96.5%;
 }
 
 .form-group input{
  width: 100%;
  margin: 0;
  color: rgb(255, 255, 255);
- border: none;
-
+ border: 1px solid rgb(0, 0, 0);
 }
 
 .form-group label {
@@ -95,6 +100,4 @@
  background-color: rgb(0, 0, 0);
  padding: 10px;
  color: rgb(105, 105, 105);
- 
-  /* Adjust as needed */
 } 
