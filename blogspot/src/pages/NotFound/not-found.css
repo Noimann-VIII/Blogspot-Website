@@ -1,17 +1,15 @@
 .notfound-background {
-  height: 80vh; /* keeps header visible */
+  height: 80vh; 
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain; /* fits image neatly */
-  background-color: #000; /* fills extra space */
+  background-size: contain;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Transparent container for 404 message */
 .notfound-container {
-  background: rgba(0, 0, 0, 0.4); /* transparent black overlay */
+  background: rgba(0, 0, 0, 0.4);
   padding: 40px 60px;
   border-radius: 10px;
   text-align: center;
@@ -19,13 +17,13 @@
 }
 
 .notfound-container h1 {
-  font-size: 6rem;
+  font-size: 800rem;
   margin-bottom: 10px;
-  color: #ccc; /* softer gray for contrast */
+  color: #ccc; 
 }
 
 .notfound-container p {
-  font-size: 1.2rem;
+  font-size: 1.7rem;
   line-height: 1.4;
   color: #e0e0e0;
 }
