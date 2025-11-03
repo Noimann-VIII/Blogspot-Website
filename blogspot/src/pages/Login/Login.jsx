@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
 import "./login.css";
-import { NavLink } from "react-router";
+import LoginCard from "../../components/Login/LoginCard";
 
 function Login() {
   return (
     <>
-      <h1>Login!</h1>
+      <LoginCard></LoginCard>
     </>
   );
 }

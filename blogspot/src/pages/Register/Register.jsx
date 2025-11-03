@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import "./register.css";
 import { NavLink } from "react-router";
+import RegisterCard from "../../components/Register/RegisterCard";
 
 function Register() {
   return (
     <>
-      <h1>Register!</h1>
-      <h1>updated 3:2PM</h1>
+      <RegisterCard></RegisterCard>
     </>
   );
 }
