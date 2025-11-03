@@ -7,10 +7,11 @@ function NotFound() {
 
       <div
         style={{
-          backgroundImage: `url(${bgImage})`,
+          backgroundImage:
+         "linear-gradient(rgba(0,0,0,0.6), rgba(0, 0, 0, 0.5)), url('/images/404-bg.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          height: "100vh",
+          height: "80vh",
         }}
       >
       </div>
