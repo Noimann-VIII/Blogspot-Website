@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import "./profile.css";
+import "./login.css";
 import { NavLink } from "react-router";
 
-function Profile() {
+function Login() {
   return (
     <>
-      <h1>Profile!</h1>
+      <h1>Login!</h1>
     </>
   );
 }
 
-export default Profile;
+export default Login;

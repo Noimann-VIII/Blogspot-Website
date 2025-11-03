@@ -18,8 +18,8 @@ function Navbar() {
             </div>
 
             <div className="actions-container">
-                <NavLink to="/Login">Log In</NavLink>
-                <NavLink to="/Login">Register</NavLink>
+                <NavLink to="/login">Log In</NavLink>
+                <NavLink to="/register">Register</NavLink>
             </div>
         </nav>
         </>
