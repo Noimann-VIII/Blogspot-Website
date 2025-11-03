@@ -4,7 +4,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain; 
-  background: rgb(0, 0, 0); 
+  background-color: #424242d0; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,7 @@
 
 
 .notfound-container {
-  background: rgb(255, 254, 254); 
+  background: rgba(0, 0, 0, 0.4); 
   padding: 40px 60px;
   border-radius: 10px;
   text-align: center;
@@ -20,14 +20,14 @@
 }
 
 .notfound-container h1 {
-  font-size: 25rem;
+  font-size: 10rem;
   font-weight: 800;
   margin-bottom: 10px;
   color: #ffffff;
 }
 
 .notfound-container p {
-  font-size: 1.7rem;
+  font-size: 1.2rem;
   line-height: 1.4;
-  color: #e0e0e0;
+  color: #ffffff;
 }
