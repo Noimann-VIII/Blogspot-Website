@@ -1,0 +1,62 @@
+nav{
+    display: flex;
+    justify-content: space-between;
+    height: 75px;
+    padding: 10px;
+    margin: 0 30px;
+}
+
+nav .brand-container img{
+    height: 100%;
+}
+
+.brand-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 35px;
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+.links-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.links-container a{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 5px 10px;
+}
+
+.links-container a:hover{
+    background-color: white;
+    color: rgb(10, 10, 10);
+    padding: 5px 10px;
+}
+
+.links-container .active {
+    background-color: white;
+    color: rgb(255, 183, 0);
+    padding: 5px 10px;
+}
+
+.actions-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.actions-container button{
+    padding: 8px 15px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

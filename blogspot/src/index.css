@@ -1,0 +1,14 @@
+body
+{
+  background-color: rgb(10, 10, 10);
+  color: white
+}
+
+h1, h2, h3, h4, h5, h6, p{
+  margin: 0;
+  font-family: "Chakra Petch", sans-serif;
+}
+
+.app-container{
+  padding: 20px 40px;
+}
