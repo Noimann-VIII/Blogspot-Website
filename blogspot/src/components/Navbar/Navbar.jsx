@@ -14,12 +14,12 @@ function Navbar() {
 
             <div className="links-container">
                 <NavLink to="/home">Home</NavLink>
-                <NavLink to="/users">Users</NavLink>
+                <NavLink to="/profile">About</NavLink>
             </div>
 
             <div className="actions-container">
-                <button>Login</button>
-                <button>Register</button>
+                <NavLink to="/Login">Log In</NavLink>
+                <NavLink to="/Login">Register</NavLink>
             </div>
         </nav>
         </>

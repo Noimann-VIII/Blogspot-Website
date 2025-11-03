@@ -32,6 +32,7 @@ nav .brand-container img{
     font-size: 20px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding: 5px 10px;
+    border: solid 1px white;
 }
 
 .links-container a:hover{
@@ -50,13 +51,20 @@ nav .brand-container img{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
 }
 
-.actions-container button{
-    padding: 8px 15px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
+.actions-container a{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 5px 10px;
+    border: solid 1px white;
+}
+
+.actions-container a:hover{
+    background-color: white;
+    color: rgb(10, 10, 10);
+    padding: 5px 10px;
 }
