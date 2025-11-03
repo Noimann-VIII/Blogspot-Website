@@ -1,15 +1,18 @@
+/* Background setup */
 .notfound-background {
   height: 80vh; 
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: contain; 
+  background-color: #000; 
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+
 .notfound-container {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.4); 
   padding: 40px 60px;
   border-radius: 10px;
   text-align: center;
@@ -17,9 +20,10 @@
 }
 
 .notfound-container h1 {
-  font-size: 800rem;
+  font-size: 10rem;
+  font-weight: 800;
   margin-bottom: 10px;
-  color: #ccc; 
+  color: #ccc;
 }
 
 .notfound-container p {
