@@ -1,30 +1,32 @@
+/* Background setup */
+.notfound-background {
+  height: 80vh; /* keeps header visible */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain; /* fits image neatly */
+  background-color: #000; /* fills extra space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-h1, p {
+/* Transparent container for 404 message */
+.notfound-container {
+  background: rgba(0, 0, 0, 0.4); /* transparent black overlay */
+  padding: 40px 60px;
+  border-radius: 10px;
   text-align: center;
-  color: inherit;
-  color: #a6a6a6;
+  color: #fff;
 }
 
-h1 {
-    top: 45%;
-    font-size: 25rem;
-    font-size: 800;
-    letter-spacing: 2px;
+.notfound-container h1 {
+  font-size: 6rem;
+  margin-bottom: 10px;
+  color: #ccc; /* softer gray for contrast */
 }
 
-h1,
-p {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  margin: 0;
-}
-
-p {
-  top: 75%;
-  font-size: 1.7rem; 
-  line-height: 1.5;
-  color: #ccc; 
-  max-width: 600px;
+.notfound-container p {
+  font-size: 1.2rem;
+  line-height: 1.4;
+  color: #e0e0e0;
 }
