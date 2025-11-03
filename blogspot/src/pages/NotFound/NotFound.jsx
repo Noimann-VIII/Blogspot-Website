@@ -1,5 +1,5 @@
 import "./not-found.css";
-import bgImage from "../assets/404bg.webp"
+import bgImage from "C:/Users/user/Documents/AWA Final Project/Blogspot-Website/blogspot/src/assets/404bg.webp"
 
 function NotFound() {
   return (
