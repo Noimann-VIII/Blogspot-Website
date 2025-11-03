@@ -6,6 +6,7 @@ function Post() {
   return (
     <>
       <h1>Post!</h1>
+      <p>hello</p>
     </>
   );
 }
