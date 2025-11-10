@@ -26,6 +26,17 @@
     align-items: center;
 }
 
+.register-card  .text-error
+{
+    color: blue;
+    font-size: 14px;
+    text-align: left;
+    width: 90%;
+    margin-top: -8px;
+    margin-bottom: 8px;
+    
+}
+
 .input
 {
     margin: 0;
