@@ -142,25 +142,71 @@ function RegisterCard() {
       }
     }
 
+    //main function n chinecheck lahat kung filled na ba
    const handleregister = async (e) => {
     e.preventDefault();
     setError("");
 
-    //check kung same pass
+    // Validate first name
+    if (!firstName || firstName.match(/[0-9]/) || firstName.match(/[.!@#$%^&*(),?":{}|<>]/) || firstName.trim().length <= 1) {
+      setError("Please check your first name input");
+      return;
+    }
+    // Validate last name
+    if (!lastName || lastName.match(/[0-9]/) || lastName.match(/[.!@#$%^&*(),?":{}|<>]/) || lastName.trim().length <= 2) {
+      setError("Please check your last name input");
+      return;
+    }
+    // Validate birthdate and age
+    if (!BirthDate) {
+      setError("Please enter your birth date");
+      return;
+    }
+    const today = new Date();
+    const birthDate = new Date(BirthDate);
+    if (birthDate > today) {
+      setError("Future dates are not allowed");
+      return;
+    }
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    if (age < 18) {
+      setError("You must be at least 18 years old to register");
+      return;
+    }
+    // Validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      setError("Please enter a valid email address");
+      return;
+    }
+    // Validate password requirements
+    if (!password || 
+        password.trim().length < 6 || 
+        !password.match(/[!@#$%^&*(),?":{}|<>]/) || 
+        !password.match(/[0-9]/) || 
+        !password.match(/[A-Z]/)) {
+      setError("Please ensure your password meets all requirements");
+      return;
+    }
+    // Check if passwords match
     if (password !== confirmPassword) {
       setError("Passwords do not match!");
       return;
     }
 
-   try {
-    let fullname = firstName + " " + lastName;
+    try {
+      let fullname = firstName + " " + lastName;
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       alert("Welcome "+ fullname +"!");
     
     } catch (error) {
       setError(error.message);
-      alert("Registration error:", error);
+      console.error("Registration error:", error);
     }
   }
 
@@ -172,22 +218,33 @@ function RegisterCard() {
         <form onSubmit={handleregister}>
               <input onInput={(e)=>verifyFirstName(e) } type="text" placeholder="First Name"/>
               <p className="text-error" id="errFName"></p>
-              <input onChange={(e)=>verifyLastName(e)} type="text" placeholder="Last Name" required/>
+
+              <input onChange={(e)=>verifyLastName(e)} type="text" placeholder="Last Name" />
               <p className="text-error" id="errLName"></p>
-            <div className="form-group">
+             
+              <div className="form-group">
               <label htmlFor="birthday">Birthday:</label>
-              <input onChange={(e)=>verifyBirthDate(e)} type="date" id="bdate" name="birthday" required />
-            </div> <p className="text-error" id="errbdate"></p>
+              <input onChange={(e)=>verifyBirthDate(e)} type="date" id="bdate" name="birthday" />
+              </div> <p className="text-error" id="errbdate"></p>
+           
               <input onInput={(e) => verifyEmail(e)} type="email" placeholder="Email" />
               <p className="text-error" id="emailErr"></p>
+
               <input onChange={(e) => verifyPassword(e)} type="password" placeholder="Password"/>
               <p className="text-error" id="passwordErr"></p>
+
               <input onChange={(e) => passwordMatch(e)} type="password" placeholder="Confirm Password"/>
               <p className="text-error" id="confirmPasswordErr"></p>
-              <button type="submit">Register</button>
+
+              {firstName && lastName && BirthDate && email && password && confirmPassword && handleregister ?
+                <button type="submit" >Register</button> 
+               :
+                 <button type="submit" disabled>Register</button>}
         </form>
         <NavLink to="/login">Already have an account? Login here.</NavLink>
     </div>
+
+    
     </>
   );
 }
