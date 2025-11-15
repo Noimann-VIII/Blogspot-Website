@@ -3,7 +3,7 @@
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover; /* FIXED */
+  background-size: cover; 
   background-color: #000000d0;
   display: flex;
   justify-content: center;
@@ -16,11 +16,11 @@
   border-radius: 10px;
   text-align: center;
   color: #fff;
-  max-width: 600px; /* FIXED */
+  max-width: 600px; 
 }
 
 .notfound-container h1 {
-  font-size: 8rem; /* FIXED */
+  font-size: 10rem; 
   font-weight: 800;
   margin-bottom: 20px;
   color: #ffffff;
