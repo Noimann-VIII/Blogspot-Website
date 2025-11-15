@@ -1,5 +1,5 @@
 import "./not-found.css";
-import bgImage from "C:/Users/user/Documents/AWA Final Project/Blogspot-Website/blogspot/src/assets/404bg.webp"
+import bgImage from "../assets/404bg.webp";
 
 function NotFound() {
   return (
@@ -8,7 +8,7 @@ function NotFound() {
         className="notfound-background"
         style={{
           backgroundImage: `url(${bgImage})`,
-        }}
+        }}about=""
       >
         <div className="notfound-container">
           <h1>404</h1>
