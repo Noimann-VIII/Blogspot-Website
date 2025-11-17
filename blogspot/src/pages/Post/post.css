@@ -1,0 +1,35 @@
+.home-container{
+    display: flex;
+    justify-content: center;
+    padding-top: 150px;
+}
+.create-post{
+    display: flex;
+}
+.create-post .left img
+{
+    width: 24px;
+    border-radius: 100%;
+    margin-right: 5px;
+}
+.create-post .right *{
+    display: block;
+}
+.create-post .right textarea{
+    background-color: rgb(7, 7, 7);
+    border-radius: 5px;
+    border: none;
+    resize: none;
+    color: white;
+    outline: none;
+    padding: 5px;
+    font-size: 12px;
+    width: 400px;
+    height: 100px;
+
+}
+.create-post .right button{
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 7px;
+}

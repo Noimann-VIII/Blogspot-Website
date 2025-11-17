@@ -1,0 +1,143 @@
+
+* { box-sizing: border-box; }
+
+
+.post-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; 
+  padding: 20px;
+}
+
+
+.post-card {
+  width: 400px;
+  background-color: rgb(10, 10, 10);
+  color: #eee;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
+
+
+.post-card .profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px 0;
+}
+
+.post-card .profile img {
+  width: 32px;
+  height: 32px; 
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+
+.post-card p,
+.post-content {
+  margin: 0;
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #ddd;
+  word-break: break-word;
+}
+
+.comments-list {
+
+
+  max-height: 180px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 6px;
+  margin: 0;
+}
+
+.comment-item {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+
+.comment-item img,
+.comment-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: 0 0 32px;
+  display: block;
+}
+
+.comment-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 1 auto; 
+}
+
+
+.comment-item strong,
+.comment-body strong {
+  font-size: 13px;
+  color: #fff;
+  margin: 0;
+  display: block;
+}
+
+
+.comment-text {
+  font-size: 13px;
+  color: #ddd;
+  background: rgba(255,255,255,0.02);
+  padding: 8px 10px;
+  border-radius: 8px;
+  word-break: break-word;
+}
+
+
+.comment-delete:hover { background: rgba(255,0,0,0.04); transform: scale(1.03); }
+
+
+.comment-input-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.comment-input-row input {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.02);
+  color: #eee;
+  min-width: 0; 
+}
+.comment-input-row input::placeholder { color: rgba(255,255,255,0.45); }
+
+.comment-input-row button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  cursor: pointer;
+}
+
+
+.muted { color: rgba(255,255,255,0.45); font-size: 13px; }
+
+@media (max-width: 420px) {
+  .post-card { width: calc(100% - 32px); }
+  .comment-item strong { min-width: 68px; }
+}
