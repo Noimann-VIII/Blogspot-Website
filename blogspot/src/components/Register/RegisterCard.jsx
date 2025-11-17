@@ -203,7 +203,7 @@ function RegisterCard() {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       console.log("Successfully registered:", user.email);
-    
+      window.location.href = "/home";
     } catch (error) {
       setError(error.message);
       console.error("Registration error:", error);

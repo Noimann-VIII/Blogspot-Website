@@ -1,46 +1,134 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./post-list.css";
+import { database } from "../../firebase-config";
+import { ref, update, get } from "firebase/database";
 
 function PostList({ posts, users, currentUser, deletePost }) {
 
   const [likesMap, setLikesMap] = useState({}); 
   const [commentsMap, setCommentsMap] = useState({}); 
   const [commentInputs, setCommentInputs] = useState({}); 
-  const [showComments, setShowComments] = useState({}); 
+  const [showComments, setShowComments] = useState({});
+
+  // Load comments and likes from Firebase when posts change
+  useEffect(() => {
+    posts.forEach((post) => {
+      loadCommentsForPost(post.postID);
+      loadLikesForPost(post.postID);
+    });
+  }, [posts]);
+
+  const loadCommentsForPost = async (postID) => {
+    try {
+      const commentsRef = ref(database, `posts/${postID}/comments`);
+      const snapshot = await get(commentsRef);
+      if (snapshot.exists()) {
+        const commentsData = snapshot.val();
+        const commentsArray = Array.isArray(commentsData) ? commentsData : Object.values(commentsData);
+        setCommentsMap((prev) => ({
+          ...prev,
+          [postID]: commentsArray || [],
+        }));
+      }
+    } catch (error) {
+      console.error("Error loading comments:", error);
+    }
+  };
+
+  const loadLikesForPost = async (postID) => {
+    try {
+      const likesRef = ref(database, `posts/${postID}/likes`);
+      const snapshot = await get(likesRef);
+      if (snapshot.exists()) {
+        const likesData = snapshot.val();
+        setLikesMap((prev) => ({
+          ...prev,
+          [postID]: likesData || {},
+        }));
+      }
+    } catch (error) {
+      console.error("Error loading likes:", error);
+    }
+  };
 
   
-  const toggleLike = (postID) => {
+  const toggleLike = async (postID) => {
     setLikesMap((prev) => {
       const postLikes = prev[postID] || {};
       const liked = postLikes[currentUser.uid];
+      const updatedLikes = {
+        ...postLikes,
+        [currentUser.uid]: !liked,
+      };
+
+      // Save to Firebase
+      update(ref(database, `posts/${postID}`), {
+        likes: updatedLikes,
+      }).catch((error) => console.error("Error updating likes:", error));
+
       return {
         ...prev,
-        [postID]: {
-          ...postLikes,
-          [currentUser.uid]: !liked,
-        },
+        [postID]: updatedLikes,
       };
     });
   };
 
 
-  const addComment = (postID) => {
+  const addComment = async (postID) => {
     const text = (commentInputs[postID] || "").trim();
     if (!text) return;
-    setCommentsMap((prev) => {
-      const postComments = prev[postID] || [];
-      return { ...prev, [postID]: [...postComments, { uid: currentUser.uid, text }] };
-    });
-    setCommentInputs((prev) => ({ ...prev, [postID]: "" }));
-    setShowComments((prev) => ({ ...prev, [postID]: true }));
+
+    const newComment = {
+      uid: currentUser.uid,
+      firstName: currentUser.firstName,
+      lastName: currentUser.lastName,
+      text: text,
+      timestamp: Date.now(),
+    };
+
+    try {
+      // Save comment to Firebase
+      const commentsRef = ref(database, `posts/${postID}/comments`);
+      const snapshot = await get(commentsRef);
+      
+      let updatedComments = [];
+      if (snapshot.exists()) {
+        const existingComments = snapshot.val();
+        updatedComments = Array.isArray(existingComments) ? existingComments : Object.values(existingComments);
+      }
+      
+      updatedComments.push(newComment);
+      
+      // Update Firebase with new comments array
+      await update(ref(database, `posts/${postID}`), {
+        comments: updatedComments,
+      });
+
+      // Update local state
+      setCommentsMap((prev) => ({
+        ...prev,
+        [postID]: updatedComments,
+      }));
+      
+      setCommentInputs((prev) => ({ ...prev, [postID]: "" }));
+      setShowComments((prev) => ({ ...prev, [postID]: true }));
+    } catch (error) {
+      alert("Error adding comment: " + error.message);
+    }
   };
 
   
   const sharePost = (postID) => {
-    const link = `${window.location.origin}/post/${postID}`;
-    navigator.clipboard?.writeText(link)
-      .then(() => alert("Post link copied to clipboard!"))
-      .catch(() => window.prompt("Copy this link:", link));
+    const link = `${window.location.origin}/post?id=${postID}`;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(link)
+        .then(() => alert("Post link copied to clipboard!"))
+        .catch(() => {
+          window.prompt("Copy this link:", link);
+        });
+    } else {
+      window.prompt("Copy this link:", link);
+    }
   };
 
   return (
@@ -48,8 +136,8 @@ function PostList({ posts, users, currentUser, deletePost }) {
       {posts.length === 0 && <p className="muted">No posts yet.</p>}
 
       {posts.map((post) => {
-        const owner = users[post.owner];
-        if (!owner) return null;
+        const owner = users[post.owner] || { firstName: post.firstName, lastName: post.lastName };
+        if (!owner || !owner.firstName) return null;
 
         const postID = post.postID;
         const postLikes = likesMap[postID] || {};
@@ -109,7 +197,7 @@ function PostList({ posts, users, currentUser, deletePost }) {
               <div className="comments-panel">
                 {postComments.length === 0 && <p className="muted">No comments yet.</p>}
                 {postComments.map((c, idx) => {
-                  const commenter = users[c.uid] || { firstName: "User", lastName: "" };
+                  const commenter = users[c.uid] || { firstName: c.firstName || "User", lastName: c.lastName || "" };
                   return (
                     <div className="comment-item" key={idx}>
                       <strong>{commenter.firstName} {commenter.lastName}:</strong> {c.text}
