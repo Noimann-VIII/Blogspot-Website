@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./login-card.css";
 import { NavLink } from "react-router";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase-config";
 
 function LoginCard() {
