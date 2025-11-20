@@ -1,0 +1,43 @@
+.home-container{
+    display: flex;
+    justify-content: center;
+    padding-top: 150px;
+}
+.create-post{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    align-items: center;
+}
+.create-post .left img
+{
+    width: 32px;
+    border-radius: 100%;
+    margin-right: 5px;
+    border: 2px solid rgb(200, 200, 200);
+}
+.create-post .right *{
+    display: block;
+}
+.create-post .right textarea{
+    background-color: rgb(255, 255, 255);
+    border-radius: 0px;
+    border: none;
+    resize: none;
+    color: rgb(0, 0, 0);
+    outline: none;
+    padding: 5px;
+    font-size: 12px;
+    width: 440px;
+    height: 100px;
+
+}
+.create-post .right button{
+    padding: 8px 12px;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 0px;
+    color: black;
+    background-color: white;
+    border: none;
+}

@@ -4,6 +4,9 @@ nav{
     height: 75px;
     padding: 10px;
     margin: 0 30px;
+    background-color: rgba(10, 10, 10, 0);
+    z-index: 100;
+    position: relative;
 }
 
 nav .brand-container img{
@@ -54,16 +57,23 @@ nav .brand-container img{
     gap: 20px;
 }
 
-.actions-container a{
+.actions-container a,button{
     text-decoration: none;
-    color: white;
+    color: rgb(255, 255, 255);
     font-size: 20px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding: 5px 10px;
-    border: solid 1px white;
+    border: solid 1px rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .actions-container a:hover{
+    background-color: white;
+    color: rgb(10, 10, 10);
+    padding: 5px 10px;
+}
+
+.actions-container button:hover{
     background-color: white;
     color: rgb(10, 10, 10);
     padding: 5px 10px;
