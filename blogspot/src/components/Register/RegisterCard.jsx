@@ -111,9 +111,6 @@ function RegisterCard() {
       if(passwordValue.trim().length === 0) {
         passwordErr.innerHTML = "*Password cannot be empty";
       }
-      else if(passwordValue.trim().length < 6) {
-        passwordErr.innerHTML = "*Password must be at least 6 characters long";
-      }
       else if(!passwordValue.match(/[!@#$%^&*(),?":{}|<>]/)) {
         passwordErr.innerHTML = "*Password must contain at least one special character";
       }
@@ -122,6 +119,9 @@ function RegisterCard() {
       }
       else if(!passwordValue.match(/[A-Z]/)) {
         passwordErr.innerHTML = "*Password must contain at least one uppercase letter";
+      }
+      else if(passwordValue.trim().length < 6) {
+        passwordErr.innerHTML = "*Password must be at least 6 characters long";
       }
       else {
         setPassword(passwordValue);
@@ -241,7 +241,7 @@ function RegisterCard() {
                :
                  <button type="submit" disabled>Register</button>}
         </form>
-        <NavLink to="/login">Already have an account? Login here.</NavLink>
+        <NavLink to="/login">Already have an account? <span className="underline">Login here</span>.</NavLink>
     </div>
 
     

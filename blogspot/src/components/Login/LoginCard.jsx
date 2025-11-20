@@ -6,17 +6,25 @@ import { auth } from "../../firebase-config";
 
 function LoginCard() {
 
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   function handleLogin(e) 
   {
-    e?.preventDefault();
+    e.preventDefault();
+    setError("");
+
+    if (!email || !password) {
+      setError("*Input fields are empty");
+      return;
+    }
+
     signInWithEmailAndPassword(auth, email, password)
     .then(() => {
       window.location.href="/home";
-    }).catch((error) => {
-      alert(error.message);
+    }).catch(() => {
+      setError("*Invalid credentials");
     })
   }
 
@@ -24,12 +32,13 @@ function LoginCard() {
     <>
     <div className="login-card">
         <h1>Login</h1>
-        <form>
+        {error && <div className="error-message">{error}</div>}
+        <form onSubmit={handleLogin}>
             <input onChange={(e)=>setEmail(e.target.value)} type="email" placeholder="Email" />
             <input onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="Password" />
-            <button onClick={handleLogin}>Login</button>
+            <button type="submit">Login</button>
         </form>
-        <NavLink to="/register">Don't have an account? Register here.</NavLink>
+        <NavLink to="/register">Don't have an account? <span className="underline">Register here</span>.</NavLink>
     </div>
     </>
   );

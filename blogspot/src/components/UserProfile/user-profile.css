@@ -1,18 +1,18 @@
-.profile-card {
+.user-card {
     width: 100%;
     display: flex;
     justify-content: center;
-    background-color: rgb(7, 7, 7);
+    background-color: rgb(255, 255, 255);
     height: 100px;
     position: relative;
  
 }
-.profile-buttons{
+.user-buttons{
     position: absolute;
     bottom: 0;
     right: 10px;
 }
-.profile-picture button{
+.user-picture button{
     width: fit-content;
     border-radius: 100%;
     padding: 5px;
@@ -22,11 +22,11 @@
     right: 10px;
     font-size: 12px;
 }
-.profile-picture{
+.user-picture{
     position: relative;
 }
 
-.profile-details {
+.user-details {
     position: relative;
     top: 30px;
     display: flex;
@@ -34,17 +34,24 @@
     align-items: center;
 }
 
-.profile-details img {
+.user-details img {
     width: 100px;
     border-radius: 100%;
-    border: 10px solid rgb(7, 7, 7);
+    border: 3px solid rgb(255, 255, 255);
 }
 
-.profile-buttons button{
+.user-buttons button{
     width: fit-content;
-    border-radius: 100%;
     padding: 5px;
     margin: 2px;
     font-size: 10px;
+    border: none;
+    background-color: black;
+    color: white;
+}
 
+body
+{
+    align-items: center;
+    justify-content: center;
 }

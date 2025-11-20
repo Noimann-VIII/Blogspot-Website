@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import "./profile.css";
-import { NavLink } from "react-router";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 
 

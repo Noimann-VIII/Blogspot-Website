@@ -12,13 +12,22 @@
 
 
 .post-card {
-  width: 400px;
+  width: 480px;
   background-color: rgb(10, 10, 10);
   color: #eee;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 0px;
   position: relative;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  border: 1px solid rgb(255, 255, 255);
+  padding-bottom: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.post-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 180px;
 }
 
 
@@ -31,10 +40,15 @@
 
 .post-card .profile img {
   width: 32px;
-  height: 32px; 
   border-radius: 50%;
   object-fit: cover;
   display: block;
+  border: 2px solid rgb(200, 200, 200);
+}
+
+.post-card .profile h5 { 
+  margin: 0; 
+  text-align: left;
 }
 
 
@@ -46,6 +60,11 @@
   line-height: 1.4;
   color: #ddd;
   word-break: break-word;
+  text-align: left;
+}
+
+.post-card .post-content {
+  flex: 1 1 auto;
 }
 
 .comments-list {
@@ -112,26 +131,34 @@
   display: flex;
   gap: 8px;
   margin-top: 10px;
+  width: 480px;
+  justify-content: center;
+  margin-left: -21px;
 }
 
 .comment-input-row input {
   flex: 1;
   padding: 8px 10px;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.04);
-  background: rgba(255,255,255,0.02);
-  color: #eee;
+  border-radius: 0px;
+  border: none;
+  background: rgb(255, 255, 255);
+  color: #000000;
   min-width: 0; 
 }
-.comment-input-row input::placeholder { color: rgba(255,255,255,0.45); }
+.comment-input-row input::placeholder { color: rgba(0, 0, 0, 0.45); }
 
 .comment-input-row button {
   padding: 8px 12px;
-  border-radius: 8px;
+  border-radius: 0px;
   border: none;
-  background: rgba(255,255,255,0.06);
-  color: #fff;
+  background: rgb(255, 255, 255);
+  color: #000000;
   cursor: pointer;
+}
+
+.comments-panel
+{
+  padding-top: 20px;
 }
 
 
@@ -140,4 +167,29 @@
 @media (max-width: 420px) {
   .post-card { width: calc(100% - 32px); }
   .comment-item strong { min-width: 68px; }
+}
+
+.post-actions {
+  width: 109.5%;
+  display: flex;
+  margin: 0px;
+  margin-top: 15px;
+  margin-left: -21px;
+  justify-content: center;
+}
+
+.post-actions {
+  margin-top: 20px;
+}
+
+.post-actions button {
+  flex: 1 1 0;
+  background: rgb(255, 255, 255);
+  color: #000000;
+  border: none;
+  padding: 8px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

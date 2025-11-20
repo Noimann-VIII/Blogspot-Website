@@ -9,6 +9,7 @@ function PostList({ posts, users, currentUser, deletePost }) {
   const [commentsMap, setCommentsMap] = useState({}); 
   const [commentInputs, setCommentInputs] = useState({}); 
   const [showComments, setShowComments] = useState({});
+  const currentUid = currentUser?.uid || null;
 
   // Load comments and likes from Firebase when posts change
   useEffect(() => {
@@ -53,12 +54,17 @@ function PostList({ posts, users, currentUser, deletePost }) {
 
   
   const toggleLike = async (postID) => {
+    if (!currentUid) {
+      alert("Please log in to like posts");
+      return;
+    }
+
     setLikesMap((prev) => {
       const postLikes = prev[postID] || {};
-      const liked = postLikes[currentUser.uid];
+      const liked = postLikes[currentUid];
       const updatedLikes = {
         ...postLikes,
-        [currentUser.uid]: !liked,
+        [currentUid]: !liked,
       };
 
       // Save to Firebase
@@ -75,11 +81,16 @@ function PostList({ posts, users, currentUser, deletePost }) {
 
 
   const addComment = async (postID) => {
+    if (!currentUid) {
+      alert("Please log in to comment");
+      return;
+    }
+
     const text = (commentInputs[postID] || "").trim();
     if (!text) return;
 
     const newComment = {
-      uid: currentUser.uid,
+      uid: currentUid,
       firstName: currentUser.firstName,
       lastName: currentUser.lastName,
       text: text,

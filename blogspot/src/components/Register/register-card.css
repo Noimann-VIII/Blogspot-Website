@@ -28,13 +28,14 @@
 
 .register-card  .text-error
 {
-    color: blue;
+    color: rgb(136, 160, 231);
     font-size: 14px;
-    text-align: left;
-    width: 90%;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
     margin-top: -8px;
     margin-bottom: 8px;
-    
+    padding: 0 10px;
 }
 
 .input
@@ -54,7 +55,8 @@
     background-color: rgb(0, 0, 0);
     border: 1px solid rgb(255, 255, 255);
     font-size: 16px;
-    width: 90%;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .register-card input:focus
@@ -69,7 +71,8 @@
 {
     padding: 10px;
     font-size: 16px;
-    width: 97%;
+    width: 100%;
+    box-sizing: border-box;
     background-color: rgb(136, 160, 231);
     border: none;
     color: white;
@@ -80,7 +83,20 @@
 {
     padding: 10px;
     font-size: 16px;
-    width: 97%;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgb(55, 72, 121);
+    border: none;
+    color: rgb(33, 42, 69);
+    cursor: pointer;
+}
+
+.register-card button:disabled:hover
+{
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
     background-color: rgb(55, 72, 121);
     border: none;
     color: rgb(33, 42, 69);
@@ -98,6 +114,7 @@
     display: block;
     color: rgb(136, 160, 231);
     text-decoration: none;
+    cursor: default;
 }
 
 .form-group {
@@ -109,9 +126,9 @@
 }
 
 .form-group input{
- width: 100%;
+ width: 63%;
  margin: 0;
- color: rgb(255, 255, 255);
+ color: rgb(105, 105, 105);
  border: 1px solid rgb(0, 0, 0);
 }
 
@@ -123,3 +140,9 @@
  padding: 10px;
  color: rgb(105, 105, 105);
 } 
+
+.underline
+{
+    text-decoration: underline;
+    cursor: pointer;
+}
