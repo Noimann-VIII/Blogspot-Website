@@ -11,14 +11,12 @@ function Post() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
-  // Hardcoded users (including current user)
   const [users, setUsers] = useState({
-    u1: { firstName: "Kyla", lastName: "Naz" }, // current user
+    u1: { firstName: "Kyla", lastName: "Naz" },
     u2: { firstName: "John", lastName: "Doe" },
     u3: { firstName: "Jane", lastName: "Smith" },
   });
 
-  // Get currently logged-in user from Firebase
   useEffect(() => {
     const unsubscribeAuth = auth.onAuthStateChanged((currentUser) => {
       if (currentUser) {
@@ -26,23 +24,21 @@ function Post() {
         const nameParts = name.split(" ");
         const firstName = nameParts[0];
         const lastName = nameParts[1] || "";
-        
+
         const loggedInUser = {
           uid: currentUser.uid,
           firstName: firstName,
           lastName: lastName,
           email: currentUser.email,
         };
-        
+
         setUser(loggedInUser);
-        
-        // Add current user to users map
+
         setUsers((prevUsers) => ({
           ...prevUsers,
           [currentUser.uid]: { firstName, lastName },
         }));
       } else {
-        // No user logged in
         setUser(null);
       }
     });
@@ -50,76 +46,65 @@ function Post() {
     return unsubscribeAuth;
   }, []);
 
-  // 1. Get current user's UID from Firebase Auth
- useEffect(() => {
-  const unsubscribeAuth = auth.onAuthStateChanged((currentUser) => {
-   if (currentUser) {
-    // --- FAST FALLBACK LOGIC ---
-    const name = currentUser.displayName || currentUser.email || "User";
-    const nameParts = name.split(" ");
-    const fallbackFirstName = nameParts[0];
-    const fallbackLastName = nameParts[1] || "";
-    // ---------------------------
-        
-    setUser({ 
-     uid: currentUser.uid, 
-     email: currentUser.email,
-     firstName: fallbackFirstName,
-     lastName: fallbackLastName 
+  useEffect(() => {
+    const unsubscribeAuth = auth.onAuthStateChanged((currentUser) => {
+      if (currentUser) {
+        const name = currentUser.displayName || currentUser.email || "User";
+        const nameParts = name.split(" ");
+        const fallbackFirstName = nameParts[0];
+        const fallbackLastName = nameParts[1] || "";
+
+        setUser({
+          uid: currentUser.uid,
+          email: currentUser.email,
+          firstName: fallbackFirstName,
+          lastName: fallbackLastName,
+        });
+      } else {
+        setUser(null);
+      }
     });
-   } else {
-    setUser(null);
-   }
-  });
 
-  return unsubscribeAuth;
- }, []);
+    return unsubscribeAuth;
+  }, []);
 
- // 2. Fetch DEFINITIVE Names from Realtime Database (Runs once UID is available)
- useEffect(() => {
-  // Only proceed if user object and UID exist
-  if (user && user.uid) {
-   const userRef = ref(database, `users/${user.uid}`);
+  useEffect(() => {
+    if (user && user.uid) {
+      const userRef = ref(database, `users/${user.uid}`);
 
-   const unsubscribeDB = onValue(userRef, (snapshot) => {
-    if (snapshot.exists()) {
-     const dbUserData = snapshot.val();
-     
-     // Accessing the nested 'fullName' object
-     const { fullName } = dbUserData;
-     
-     if (fullName) {
-      // Get firstName and lastName from the nested fullName object
-      const firstName = fullName.firstName || user.firstName;
-      const lastName = fullName.lastName || user.lastName;
+      const unsubscribeDB = onValue(userRef, (snapshot) => {
+        if (snapshot.exists()) {
+          const dbUserData = snapshot.val();
 
-      // Update state with the definitive names from the database
-      setUser((prevUser) => ({
-       ...prevUser,
-       firstName,
-       lastName,
-      }));
-     }
+          const { fullName } = dbUserData;
+
+          if (fullName) {
+            const firstName = fullName.firstName || user.firstName;
+            const lastName = fullName.lastName || user.lastName;
+
+            setUser((prevUser) => ({
+              ...prevUser,
+              firstName,
+              lastName,
+            }));
+          }
+        }
+      });
+
+      return () => unsubscribeDB();
     }
-   });
+  }, [user?.uid]);
 
-   return () => unsubscribeDB(); // Clean up the DB listener
-  }
- }, [user?.uid]);
-
-  // Fetch posts from Firebase on component mount
   useEffect(() => {
     const postsRef = ref(database, "posts");
-    
+
     const unsubscribe = onValue(postsRef, (snapshot) => {
       if (snapshot.exists()) {
         const postsData = snapshot.val();
-        // Convert Firebase object to array of posts
         const postsArray = Object.keys(postsData).map((key) => ({
           postID: key,
           ...postsData[key],
         }));
-        // Sort by newest first
         postsArray.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
         setPosts(postsArray);
       } else {
@@ -128,7 +113,7 @@ function Post() {
       setLoading(false);
     });
 
-    return unsubscribe; // cleanup listener on unmount
+    return unsubscribe;
   }, []);
 
   const createPost = async () => {
@@ -144,19 +129,15 @@ function Post() {
     };
 
     try {
-      // Push to Firebase
       await push(ref(database, "posts"), newPost);
-      setContent(""); // clear textarea
+      setContent("");
     } catch (error) {
       alert("Error creating post: " + error.message);
     }
   };
 
   const deletePost = async (postID) => {
-    if (!window.confirm("Are you sure you want to delete this post?")) return;
-    
     try {
-      // Delete from Firebase
       await remove(ref(database, `posts/${postID}`));
     } catch (error) {
       alert("Error deleting post: " + error.message);
@@ -192,10 +173,17 @@ function Post() {
       {loading ? (
         <p style={{ textAlign: "center", marginTop: "20px" }}>Loading posts...</p>
       ) : posts.length === 0 ? (
-        <p style={{ textAlign: "center", marginTop: "20px" }}>No posts yet. Be the first to create one!</p>
+        <p style={{ textAlign: "center", marginTop: "20px" }}>
+          No posts yet. Be the first to create one!
+        </p>
       ) : (
         <>
-          <PostList posts={posts} users={users} currentUser={user} deletePost={deletePost} />
+          <PostList
+            posts={posts}
+            users={users}
+            currentUser={user}
+            deletePost={deletePost}
+          />
         </>
       )}
     </>
