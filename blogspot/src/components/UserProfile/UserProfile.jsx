@@ -43,7 +43,7 @@ function UserProfile() {
   return (
     <div className="user-card">
       <div className="user-buttons">
-        <NavLink to="">
+        <NavLink to="/edit-profile">
           <button style={{ textDecoration: "none" }}>
             <i className="fa fa-edit" />
           </button>
