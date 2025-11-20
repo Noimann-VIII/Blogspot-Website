@@ -230,10 +230,10 @@ function RegisterCard() {
               <input onInput={(e) => verifyEmail(e)} type="email" placeholder="Email" />
               <p className="text-error" id="emailErr"></p>
 
-              <input onChange={(e) => verifyPassword(e)} type="password" placeholder="Password"/>
+              <input onChange={(e) => verifyPassword(e)} type="password" placeholder="Password (ex.: Asd12%)"/>
               <p className="text-error" id="passwordErr"></p>
 
-              <input onChange={(e) => passwordMatch(e)} type="password" placeholder="Confirm Password"/>
+              <input onChange={(e) => passwordMatch(e)} type="password" placeholder="Confirm Password (ex.: Asd12%)"/>
               <p className="text-error" id="confirmPasswordErr"></p>
 
               {firstName && lastName && BirthDate && email && password && confirmPassword && handleregister ?
