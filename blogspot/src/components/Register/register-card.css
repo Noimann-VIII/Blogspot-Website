@@ -88,7 +88,7 @@
     background-color: rgb(55, 72, 121);
     border: none;
     color: rgb(33, 42, 69);
-    cursor: pointer;
+    cursor: default;
 }
 
 .register-card button:disabled:hover
@@ -100,7 +100,7 @@
     background-color: rgb(55, 72, 121);
     border: none;
     color: rgb(33, 42, 69);
-    cursor: pointer;
+    cursor: default;
 }
 
 .register-card button:hover
@@ -122,11 +122,10 @@
   align-items: center;
   justify-content: center;
   font-family: chakra petch, sans-serif;
-  width: 96.5%;
+  width: 100%;
 }
 
 .form-group input{
- width: 63%;
  margin: 0;
  color: rgb(105, 105, 105);
  border: 1px solid rgb(0, 0, 0);

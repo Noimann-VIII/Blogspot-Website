@@ -50,6 +50,63 @@ function Post() {
     return unsubscribeAuth;
   }, []);
 
+  // 1. Get current user's UID from Firebase Auth
+ useEffect(() => {
+  const unsubscribeAuth = auth.onAuthStateChanged((currentUser) => {
+   if (currentUser) {
+    // --- FAST FALLBACK LOGIC ---
+    const name = currentUser.displayName || currentUser.email || "User";
+    const nameParts = name.split(" ");
+    const fallbackFirstName = nameParts[0];
+    const fallbackLastName = nameParts[1] || "";
+    // ---------------------------
+        
+    setUser({ 
+     uid: currentUser.uid, 
+     email: currentUser.email,
+     firstName: fallbackFirstName,
+     lastName: fallbackLastName 
+    });
+   } else {
+    setUser(null);
+   }
+  });
+
+  return unsubscribeAuth;
+ }, []);
+
+ // 2. Fetch DEFINITIVE Names from Realtime Database (Runs once UID is available)
+ useEffect(() => {
+  // Only proceed if user object and UID exist
+  if (user && user.uid) {
+   const userRef = ref(database, `users/${user.uid}`);
+
+   const unsubscribeDB = onValue(userRef, (snapshot) => {
+    if (snapshot.exists()) {
+     const dbUserData = snapshot.val();
+     
+     // Accessing the nested 'fullName' object
+     const { fullName } = dbUserData;
+     
+     if (fullName) {
+      // Get firstName and lastName from the nested fullName object
+      const firstName = fullName.firstName || user.firstName;
+      const lastName = fullName.lastName || user.lastName;
+
+      // Update state with the definitive names from the database
+      setUser((prevUser) => ({
+       ...prevUser,
+       firstName,
+       lastName,
+      }));
+     }
+    }
+   });
+
+   return () => unsubscribeDB(); // Clean up the DB listener
+  }
+ }, [user?.uid]);
+
   // Fetch posts from Firebase on component mount
   useEffect(() => {
     const postsRef = ref(database, "posts");

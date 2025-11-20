@@ -10,7 +10,6 @@
   align-items: center;
   margin-top: -91px;
   z-index: -100;
-  opacity: 0.1;
 }
 
 .notfound-container {
@@ -24,14 +23,14 @@
 }
 
 .notfound-container h1 {
-  font-size: 2rem;
+  font-size: 1000%;
   font-weight: 800;
   margin-bottom: 20px;
-  color: #ff0000;
+  color: #ffffff;
 }
 
 .notfound-container p {
   font-size: 1.6rem;
   line-height: 1.4;
-  color: #ff0000;
+  color: #ffffff;
 }
