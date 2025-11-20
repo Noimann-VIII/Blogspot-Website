@@ -55,7 +55,7 @@ function PostList({ posts, users, currentUser, deletePost }) {
   
   const toggleLike = async (postID) => {
     if (!currentUid) {
-      alert("Please log in to like posts");
+      console.log("Please log in to like posts");
       return;
     }
 
@@ -81,18 +81,13 @@ function PostList({ posts, users, currentUser, deletePost }) {
 
 
   const addComment = async (postID) => {
-    if (!currentUid) {
-      alert("Please log in to comment");
-      return;
-    }
-
     const text = (commentInputs[postID] || "").trim();
     if (!text) return;
 
     const newComment = {
-      uid: currentUid,
-      firstName: currentUser.firstName,
-      lastName: currentUser.lastName,
+      uid: currentUid || `anonymous-${Date.now()}`,
+      firstName: currentUser?.firstName || "anonymous",
+      lastName: currentUser?.lastName || "",
       text: text,
       timestamp: Date.now(),
     };
@@ -133,7 +128,7 @@ function PostList({ posts, users, currentUser, deletePost }) {
     const link = `${window.location.origin}/post?id=${postID}`;
     if (navigator.clipboard) {
       navigator.clipboard.writeText(link)
-        .then(() => alert("Post link copied to clipboard!"))
+        .then(() => console.log("Post link copied to clipboard!"))
         .catch(() => {
           window.prompt("Copy this link:", link);
         });
@@ -147,12 +142,12 @@ function PostList({ posts, users, currentUser, deletePost }) {
       {posts.length === 0 && <p className="muted">No posts yet.</p>}
 
       {posts.map((post) => {
-        const owner = users[post.owner] || { firstName: post.firstName, lastName: post.lastName };
+        const owner = users[post.owner] || { firstName: post.firstName || "Unknown", lastName: post.lastName || "" };
         if (!owner || !owner.firstName) return null;
 
         const postID = post.postID;
         const postLikes = likesMap[postID] || {};
-        const meLiked = !!postLikes[currentUser.uid];
+        const meLiked = currentUid ? !!postLikes[currentUid] : false;
         const likeCount = Object.keys(postLikes).filter((uid) => postLikes[uid]).length;
 
         const postComments = commentsMap[postID] || [];
@@ -192,7 +187,7 @@ function PostList({ posts, users, currentUser, deletePost }) {
                 <i className="fa fa-share" />
               </button>
 
-              {post.owner === currentUser.uid && (
+              {post.owner === currentUid && (
                 <button
                   className="btn-delete"
                   onClick={() => deletePost(postID)}

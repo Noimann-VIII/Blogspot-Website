@@ -3,31 +3,35 @@
   height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover; 
-  background-color: #000000d0;
+  background-size: 50%; 
+  background-color: #000000;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: -91px;
+  z-index: -100;
+  opacity: 0.1;
 }
 
 .notfound-container {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0);
   padding: 40px 60px;
   border-radius: 10px;
   text-align: center;
   color: #fff;
-  max-width: 600px; 
+  max-width: 600px;
+  margin-top: 100px;
 }
 
 .notfound-container h1 {
-  font-size: 14rem;
+  font-size: 2rem;
   font-weight: 800;
   margin-bottom: 20px;
-  color: #ffffff;
+  color: #ff0000;
 }
 
 .notfound-container p {
   font-size: 1.6rem;
   line-height: 1.4;
-  color: #ffffff;
+  color: #ff0000;
 }

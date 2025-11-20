@@ -108,34 +108,37 @@ function Post() {
 
   return (
     <>
-      <UserProfile />
-      {!user ? (
-        <p style={{ textAlign: "center", marginTop: "20px" }}>Please log in to create posts</p>
-      ) : (
-        <>
-          <div className="home-container">
-            <div className="create-post">
-              <div className="left">
-                <img
-                  src={`https://avatar.iran.liara.run/username?username=${user.firstName}+${user.lastName}&background=000000&color=FFFFFF`}
-                  alt="Profile"
-                />
-              </div>
-              <div className="right">
-                <textarea
-                  id="txtContent"
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                  placeholder="What's on your mind?"
-                />
-                <button onClick={createPost} disabled={!content.trim()}>
-                  Create Post
-                </button>
-              </div>
+      {user && <UserProfile />}
+      {user && (
+        <div className="home-container">
+          <div className="create-post">
+            <div className="left">
+              <img
+                src={`https://avatar.iran.liara.run/username?username=${user.firstName}+${user.lastName}&background=000000&color=FFFFFF`}
+                alt="Profile"
+              />
+            </div>
+            <div className="right">
+              <textarea
+                id="txtContent"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                placeholder="What's on your mind?"
+              />
+              <button onClick={createPost} disabled={!content.trim()}>
+                Create Post
+              </button>
             </div>
           </div>
-
-          {loading ? <p>Loading posts...</p> : <PostList posts={posts} users={users} currentUser={user} deletePost={deletePost} />}
+        </div>
+      )}
+      {loading ? (
+        <p style={{ textAlign: "center", marginTop: "20px" }}>Loading posts...</p>
+      ) : posts.length === 0 ? (
+        <p style={{ textAlign: "center", marginTop: "20px" }}>No posts yet. Be the first to create one!</p>
+      ) : (
+        <>
+          <PostList posts={posts} users={users} currentUser={user} deletePost={deletePost} />
         </>
       )}
     </>
