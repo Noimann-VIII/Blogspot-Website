@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import "./register-card.css";
 import { NavLink } from "react-router";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase-config";
+import { auth, database } from "../../firebase-config"; 
+import { ref, set } from "firebase/database";
 
 function RegisterCard() {
   const [firstName, setFirstName] = useState("");
@@ -202,6 +203,14 @@ function RegisterCard() {
       let fullname = firstName + " " + lastName;
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
+
+      await set(ref(database, 'users/' + user.uid), {
+            email: email,
+            birthDate: BirthDate,
+            firstName: firstName,
+            lastName: lastName,
+        });
+
       console.log("Successfully registered:", user.email);
       window.location.href = "/home";
     } catch (error) {
