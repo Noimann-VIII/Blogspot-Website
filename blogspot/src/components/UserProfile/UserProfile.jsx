@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink } from "react-router";
 import "./user-profile.css";
 import { auth, database } from "../../firebase-config";
 import { ref, onValue } from "firebase/database";
 
 function UserProfile() {
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribeAuth = auth.onAuthStateChanged((currentUser) => {
@@ -38,16 +37,14 @@ function UserProfile() {
         if (snapshot.exists()) {
           const dbUserData = snapshot.val();
 
-          const { fullName } = dbUserData;
+          const dbFirstName = dbUserData.firstName;
+          const dbLastName = dbUserData.lastName;
 
-          if (fullName) {
-            const firstName = fullName.firstName || user.firstName;
-            const lastName = fullName.lastName || user.lastName;
-
+          if (dbFirstName && dbLastName) {
             setUser((prevUser) => ({
               ...prevUser,
-              firstName,
-              lastName,
+              firstName: dbFirstName,
+              lastName: dbLastName,
             }));
           }
         }

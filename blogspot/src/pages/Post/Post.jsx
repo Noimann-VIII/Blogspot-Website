@@ -10,12 +10,9 @@ function Post() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [users, setUsers] = useState({});
+  const AUTHORIZED_UID = "xUg0AlYWTOamb4VEzWDoIcXS17L2";
 
-  const [users, setUsers] = useState({
-    u1: { firstName: "Kyla", lastName: "Naz" },
-    u2: { firstName: "John", lastName: "Doe" },
-    u3: { firstName: "Jane", lastName: "Smith" },
-  });
 
   useEffect(() => {
     const unsubscribeAuth = auth.onAuthStateChanged((currentUser) => {
@@ -76,11 +73,9 @@ function Post() {
         if (snapshot.exists()) {
           const dbUserData = snapshot.val();
 
-          const { fullName } = dbUserData;
+          const { firstName, lastName } = dbUserData;
 
-          if (fullName) {
-            const firstName = fullName.firstName || user.firstName;
-            const lastName = fullName.lastName || user.lastName;
+          if (firstName && lastName) {
 
             setUser((prevUser) => ({
               ...prevUser,
@@ -117,6 +112,11 @@ function Post() {
   }, []);
 
   const createPost = async () => {
+    if (!user || user.uid !== AUTHORIZED_UID)
+    {
+      return;
+    }
+
     const trimmed = content.trim();
     if (!trimmed) return;
 
@@ -139,15 +139,16 @@ function Post() {
   const deletePost = async (postID) => {
     try {
       await remove(ref(database, `posts/${postID}`));
-    } catch (error) {
-      alert("Error deleting post: " + error.message);
+    } catch (error) {;
     }
   };
+
+  const isAuthorizedPoster = user && user.uid === AUTHORIZED_UID;
 
   return (
     <>
       {user && <UserProfile />}
-      {user && (
+      {isAuthorizedPoster && (
         <div className="home-container">
           <div className="create-post">
             <div className="left">

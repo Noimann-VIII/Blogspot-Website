@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./register-card.css";
 import { NavLink } from "react-router";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, database } from "../../firebase-config";
 import { ref, set } from "firebase/database";
 
@@ -198,6 +198,8 @@ function RegisterCard() {
         password
       );
       const user = userCredential.user;
+      const newFullName = `${firstName.trim()} ${lastName.trim()}`;
+      await updateProfile(user, { displayName: newFullName });
 
       await set(ref(database, "users/" + user.uid), {
         email: email,
